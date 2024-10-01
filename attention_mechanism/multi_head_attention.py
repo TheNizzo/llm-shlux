@@ -14,16 +14,16 @@ class MultiHeadAttention(nn.Module):
         dropout (float): Dropout rate.
     """
 
-    def __init__(self, d_in, d_out, context_length, num_heads, dropout=0.1):
+    def __init__(self, d_in, d_out, context_length, num_heads, dropout=0.1, bias=False):
         super().__init__()
         assert d_out % num_heads == 0, "d_out must be divisible by num_heads"
         self.num_heads = num_heads
         self.d_out = d_out
         self.head_dim = d_out // num_heads
-        self.query = nn.Linear(d_in, d_out, bias=False)
-        self.key = nn.Linear(d_in, d_out, bias=False)
-        self.value = nn.Linear(d_in, d_out, bias=False)
-        self.output = nn.Linear(d_out, d_out, bias=False)
+        self.query = nn.Linear(d_in, d_out, bias=bias)
+        self.key = nn.Linear(d_in, d_out, bias=bias)
+        self.value = nn.Linear(d_in, d_out, bias=bias)
+        self.output = nn.Linear(d_out, d_out)
         self.dropout = nn.Dropout(dropout)
         self.register_buffer(
             "mask", torch.triu(torch.ones(context_length, context_length), diagonal=1)

@@ -164,3 +164,5 @@ cython_debug/
 # weights and biases
 pretraining_model/gpt2/**
 pretraining_model/model.pth
+
+langchain_integration/gpt2/**

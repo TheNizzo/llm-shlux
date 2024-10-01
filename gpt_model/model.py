@@ -61,7 +61,7 @@ class TransformerBlock(nn.Module):
             d_out=cfg["n_embd"],
             context_length=cfg["context_length"],
             num_heads=cfg["n_heads"], 
-            dropout=cfg["dropout"])
+            dropout=cfg["dropout"], bias=cfg["bias"])
         self.ln1 = LayerNorm(cfg["n_embd"])
         self.ln2 = LayerNorm(cfg["n_embd"])
         self.ff = FeedForward(cfg)
